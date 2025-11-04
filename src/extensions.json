@@ -8,10 +8,10 @@
         "description": "Nonton dan download anime subtitle Indonesia",
         "version": "1.0.0",
         "country": "Indonesia",
-        "imageUrl": "",
+        "imageUrl": "https://raw.githubusercontent.com/jitakuapp/jitaku-extensions/main/src/id/samehadaku/icon.png",
         "baseUrl": "https://v1.samehadaku.how",
         "type": "video",
-        "content": ""
+        "content": "https://raw.githubusercontent.com/jitakuapp/jitaku-extensions/main/src/id/samehadaku/index.js"
       }
     ]
   }

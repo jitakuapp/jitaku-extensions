@@ -95,7 +95,7 @@ Extracts the actual streaming URL from a video server.
 └── tsconfig.json
 ```
 
-## Adding a New Scraper
+## Adding a Extension
 
 1. Create a new directory under `src/` with the country code (e.g., `src/us/`)
 2. Create a subdirectory with the site name (e.g., `src/us/crunchyroll/`)
@@ -108,7 +108,7 @@ Extracts the actual streaming URL from a video server.
    - `getVideoServers(url)`
    - `getVideoUrl(params)`
 4. Add an icon.png file (recommended size: 64x64px)
-5. Update `src/extensions.json` with the new scraper information following this format:
+5. Update `src/extensions.json` with the new extension information following this format:
    ```json
    {
      "country": "Country Name",
