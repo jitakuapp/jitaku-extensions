@@ -1,0 +1,9 @@
+{
+  "name": "jitaku-extensions",
+  "version": "1.0.0",
+  "description": "Extensions and integrations for the Jitaku streaming and manga platform",
+  "type": "module",
+  "private": true,
+  "author": "Jitaku",
+  "license": "MIT"
+}

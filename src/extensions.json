@@ -1,0 +1,18 @@
+[
+  {
+    "country": "Indonesia",
+    "data": [
+      {
+        "id": "id-samehadaku",
+        "name": "Samehadaku",
+        "description": "Nonton dan download anime subtitle Indonesia",
+        "version": "1.0.0",
+        "country": "Indonesia",
+        "imageUrl": "",
+        "baseUrl": "https://v1.samehadaku.how",
+        "type": "video",
+        "content": ""
+      }
+    ]
+  }
+]
