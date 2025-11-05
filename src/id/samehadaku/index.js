@@ -173,9 +173,8 @@
      * @returns {Promise<Array>} Promise that resolves to an array of anime objects
      */
     getHomepage: () => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const data = await fetchWithParsing(`${BASE_URL}/`);
+      return fetchWithParsing(`${BASE_URL}/`)
+        .then((data) => {
           const $ = load(data.html);
           const animeData = [];
 
@@ -218,12 +217,12 @@
             }
           });
 
-          resolve(animeData);
-        } catch (error) {
+          return animeData;
+        })
+        .catch((error) => {
           console.error("Failed to fetch homepage:", error);
-          reject(error);
-        }
-      });
+          throw error;
+        });
     },
 
     /**
@@ -232,9 +231,8 @@
      * @returns {Promise<Object>} Promise that resolves to an anime details object
      */
     getDetails: (url) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const data = await fetchWithParsing(url);
+      return fetchWithParsing(url)
+        .then((data) => {
           const $ = load(data.html);
           const animeDetails = {};
 
@@ -288,12 +286,12 @@
             }
           });
 
-          resolve(animeDetails);
-        } catch (error) {
+          return animeDetails;
+        })
+        .catch((error) => {
           console.error("Failed to fetch anime details:", error);
-          reject(error);
-        }
-      });
+          throw error;
+        });
     },
 
     /**
@@ -302,10 +300,9 @@
      * @returns {Promise<Object>} Promise that resolves to an object with anime data and pagination info
      */
     getLatest: (page) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const uri = `${BASE_URL}/anime-terbaru/page/${page}/`;
-          const responseData = await fetchWithParsing(uri);
+      const uri = `${BASE_URL}/anime-terbaru/page/${page}/`;
+      return fetchWithParsing(uri)
+        .then((responseData) => {
           const $ = load(responseData.html);
           const animeList = [];
 
@@ -337,15 +334,15 @@
             }
           });
 
-          resolve({
+          return {
             data: animeList,
             nextPage: animeList.length > 0 ? page + 1 : undefined,
-          });
-        } catch (error) {
+          };
+        })
+        .catch((error) => {
           console.error("Failed to fetch latest anime:", error);
-          reject(error);
-        }
-      });
+          throw error;
+        });
     },
 
     /**
@@ -355,12 +352,11 @@
      * @returns {Promise<Object>} Promise that resolves to an object with anime data and pagination info
      */
     getPopular: (page) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          // For samehadaku, popular anime is on the homepage, so we'll use the same URL for all pages
-          // but implement pagination logic for consistency
-          const uri = `${BASE_URL}/`;
-          const data = await fetchWithParsing(uri);
+      // For samehadaku, popular anime is on the homepage, so we'll use the same URL for all pages
+      // but implement pagination logic for consistency
+      const uri = `${BASE_URL}/`;
+      return fetchWithParsing(uri)
+        .then((data) => {
           const $ = load(data.html);
           let animeData = [];
 
@@ -403,15 +399,15 @@
             animeData = [];
           }
 
-          resolve({
+          return {
             data: animeData,
             nextPage: page === 1 && animeData.length > 0 ? page + 1 : undefined,
-          });
-        } catch (error) {
+          };
+        })
+        .catch((error) => {
           console.error("Failed to fetch popular anime:", error);
-          reject(error);
-        }
-      });
+          throw error;
+        });
     },
 
     /**
@@ -421,12 +417,9 @@
      * @returns {Promise<Object>} Promise that resolves to an object with search results and pagination info
      */
     getSearch: (search, page) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const uri = `${BASE_URL}/page/${page}/?s=${encodeURIComponent(
-            search
-          )}`;
-          const responseData = await fetchWithParsing(uri);
+      const uri = `${BASE_URL}/page/${page}/?s=${encodeURIComponent(search)}`;
+      return fetchWithParsing(uri)
+        .then((responseData) => {
           const $ = load(responseData.html);
           const animeList = [];
 
@@ -467,15 +460,15 @@
             }
           });
 
-          resolve({
+          return {
             data: animeList,
             nextPage: animeList.length > 0 ? page + 1 : undefined,
-          });
-        } catch (error) {
+          };
+        })
+        .catch((error) => {
           console.error("Failed to search anime:", error);
-          reject(error);
-        }
-      });
+          throw error;
+        });
     },
 
     /**
@@ -484,9 +477,8 @@
      * @returns {Promise<Array>} Promise that resolves to an array of video server options
      */
     getVideoServers: (url) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const data = await fetchWithParsing(url);
+      return fetchWithParsing(url)
+        .then((data) => {
           const $ = load(data.html);
           const playerOptions = [];
 
@@ -519,12 +511,12 @@
             }
           });
 
-          resolve(playerOptions);
-        } catch (error) {
+          return playerOptions;
+        })
+        .catch((error) => {
           console.error("Failed to fetch video servers:", error);
-          reject(error);
-        }
-      });
+          throw error;
+        });
     },
 
     /**
@@ -536,37 +528,31 @@
      * @returns {Promise<string>} Promise that resolves to the video iframe URL
      */
     getVideoUrl: (params) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const formData = new URLSearchParams({
-            action: "player_ajax",
-            post: params.postId.toString(),
-            nume: params.nume.toString(),
-            type: params.type,
-          }).toString();
+      const formData = new URLSearchParams({
+        action: "player_ajax",
+        post: params.postId.toString(),
+        nume: params.nume.toString(),
+        type: params.type,
+      }).toString();
 
-          const data = await fetchWithParsing(
-            `${BASE_URL}/wp-admin/admin-ajax.php`,
-            {
-              method: "POST",
-              body: formData,
-            }
-          );
-
+      return fetchWithParsing(`${BASE_URL}/wp-admin/admin-ajax.php`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((data) => {
           const $ = load(data.html);
           const iframeSrc = $(SELECTORS.video.iframe).attr("src");
 
           if (!iframeSrc) {
-            reject(new Error("No iframe found in video player response"));
-            return;
+            throw new Error("No iframe found in video player response");
           }
 
-          resolve(iframeSrc);
-        } catch (error) {
+          return iframeSrc;
+        })
+        .catch((error) => {
           console.error("Failed to fetch video URL:", error);
-          reject(error);
-        }
-      });
+          throw error;
+        });
     },
   };
 })();
