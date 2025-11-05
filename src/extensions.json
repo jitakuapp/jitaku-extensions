@@ -9,9 +9,20 @@
         "version": "1.0.0",
         "country": "Indonesia",
         "imageUrl": "https://raw.githubusercontent.com/jitakuapp/jitaku-extensions/main/src/id/samehadaku/icon.png",
+        "content": "https://raw.githubusercontent.com/jitakuapp/jitaku-extensions/main/src/id/samehadaku/index.js",
         "baseUrl": "https://v1.samehadaku.how",
-        "type": "video",
-        "content": "https://raw.githubusercontent.com/jitakuapp/jitaku-extensions/main/src/id/samehadaku/index.js"
+        "type": "video"
+      },
+      {
+        "id": "id-kiryuu",
+        "name": "Kiryuu",
+        "description": "Baca & Download Manga Bahasa Indonesia",
+        "version": "1.0.0",
+        "country": "Indonesia",
+        "imageUrl": "https://raw.githubusercontent.com/jitakuapp/jitaku-extensions/main/src/id/kiryuu/icon.png",
+        "content": "https://raw.githubusercontent.com/jitakuapp/jitaku-extensions/main/src/id/kiryuu/index.js",
+        "baseUrl": "https://kiryuu03.com",
+        "type": "reader"
       }
     ]
   }
