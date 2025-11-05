@@ -1,22 +1,3 @@
-/**
- * Samehadaku Anime Scraper
- *
- * This module provides a comprehensive interface for scraping anime data from Samehadaku,
- * a popular Indonesian anime streaming website. It implements various methods for
- * retrieving anime information, episodes, and video sources.
- *
- * Features:
- * - Homepage anime listing
- * - Detailed anime information extraction
- * - Latest and popular anime browsing
- * - Search functionality
- * - Video server discovery and URL extraction
- *
- * @author Jitaku
- * @version 1.0.0
- * @license MIT
- */
-
 (() => {
   const BASE_URL = "https://v1.samehadaku.how";
 
