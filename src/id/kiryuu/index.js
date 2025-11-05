@@ -1,19 +1,3 @@
-/**
- * Kiryuu Manga Scraper
- *
- * A comprehensive scraper for the Kiryuu manga website (kiryuu03.com)
- * This module provides methods to extract manga information including:
- * - Homepage listings with latest updates
- * - Detailed manga information including chapters
- * - Chapter images for reading
- * - Search functionality
- * - Popular and latest manga listings
- *
- * @author Jitaku
- * @version 1.0.0
- * @license MIT
- */
-
 (() => {
   const BASE_URL = "https://kiryuu03.com";
 
